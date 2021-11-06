@@ -30,13 +30,14 @@ body{
 }
 
 .content-game-cards{
-    width: 1100px;
+    width: 1000px;
 }
 
 .row-cards{
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
 
     margin-bottom: 34px;
 }
@@ -58,6 +59,55 @@ body{
 .game-card .game-card-img{
     width: 100px;
     height: 100px;
+}
+
+.game-card .game-card-gif{
+    width: 100px;
+    height: 100px;
+}
+
+.card {
+    width: 117px;
+    height: 146px;
+
+    margin: 12px;
+
+    position: relative;
+}
+
+.face {
+    width: 100%;
+    height: 100%;
+    background-color: #A7E9AF;
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px rgba(0,0,0,.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    backface-visibility: hidden;
+    transition: all .5s;
+    transform-style: preserve-3d;
+}
+
+.back-face {
+    transform: rotateY(180deg);
+}
+
+.card-selected .back-face {
+    transform: rotateY(0deg);
+}
+
+.card-selected .front-face {
+    transform: rotateY(-180deg);
+}
+
+.card-selected-back{
+    transform: rotateY(0deg);
+}
+
+.card-selected-front{
+    transform: rotateY(-180deg);
 }
 
 @media (max-width: 1150px){
