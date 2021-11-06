@@ -8,6 +8,8 @@ body{
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
+    position: relative;
 }
 
 .game-title-content{
@@ -66,6 +68,23 @@ body{
     height: 100px;
 }
 
+.timer{
+    background-color: #A7E9AF;
+    color: white;
+    
+    font-size: 15px;
+    font-weight: bold;
+
+    padding: 5px;
+    margin: 5px;
+    
+    border-radius: 3px;
+
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
 .card {
     width: 117px;
     height: 146px;
@@ -94,13 +113,13 @@ body{
     transform: rotateY(180deg);
 }
 
-.card-selected .back-face {
+/* .card-selected:hover .back-face {
     transform: rotateY(0deg);
 }
 
-.card-selected .front-face {
+.card-selected:hover .front-face {
     transform: rotateY(-180deg);
-}
+} */
 
 .card-selected-back{
     transform: rotateY(0deg);

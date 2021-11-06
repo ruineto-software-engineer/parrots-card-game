@@ -1,13 +1,20 @@
+//Global
 let counter = 1;
+
 let attempt1 = 0;
 let attempt2 = 0;
 let attempt1f = 0;
 let attempt2f = 0;
 
+let counter_move = 0;
+
+let counter_game_time = 0; 
+
+
 //Game Requests
-let number_of_cards = parseInt(prompt("Com quantas cartas você deseja começar?"));
+let number_of_cards = parseInt(prompt("Com quantas cartas você deseja começar? (Escolher números entre 4 e 14, que sejam pares)"));
 let even_number = number_of_cards % 2;
-const row_cards = document.querySelector(".row-cards");
+let row_cards = document.querySelector(".row-cards");
 
 let array_gifs = [
     'gif1.gif',
@@ -25,26 +32,25 @@ while(even_number !== 0 || number_of_cards === null || number_of_cards < 4 || nu
     even_number = number_of_cards % 2;
 }
 
-let array_gifs_even = array_gifs.slice(0, number_of_cards/2); //corta o array até onde o usuário disse
-    array_gifs_even = array_gifs_even.concat(array_gifs_even); //e eu copio o valor de cima, para que exista de forma forçada os pares
+let array_gifs_even = array_gifs.slice(0, number_of_cards/2);
+    array_gifs_even = array_gifs_even.concat(array_gifs_even);
 
-array_gifs_even.sort(comparator); // Após esta linha, a minhaArray estará embaralhada
+array_gifs_even.sort(comparator); //Após esta linha, a minhaArray estará embaralhada
 
 //Input of Game Cards
 for(let i = 0; i < number_of_cards; i++){
     row_cards.innerHTML = row_cards.innerHTML + `
         <div class="card" data-identifier="card" onclick="game_card_select(this)">
-            <div class="game-card front-face face">
+            <div class="game-card front-face face" data-identifier="front-face">
                 <img class="game-card-img" src="./assets/img/front.png">
             </div><!--front-face-->
-            <div class="game-card back-face face">
+            <div class="game-card back-face face" data-identifier="back-face">
                 <img class="game-card-gif" src="./assets/gif/${array_gifs_even[i]}">
             </div><!--back-face-->
         </div><!--game-card-->
     `;
 }
 
-// Esta função pode ficar separada do código acima, onde você preferir
 function comparator() { 
 	return Math.random() - 0.5; 
 }
@@ -56,9 +62,12 @@ function game_card_select(card_game) {
     turn_down.classList.add("card-selected-back");
     turn_down2.classList.add("card-selected-front");
 
+    counter_move++;
+
     if(counter === 1){
         attempt1 = card_game.querySelector(".back-face");
         attempt1f = card_game.querySelector(".front-face");
+
         counter++;
     }else if(counter === 2){
         attempt2 = card_game.querySelector(".back-face");
@@ -70,16 +79,14 @@ function game_card_select(card_game) {
 
             attempt2.classList.add("card-selected-back");
             attempt2f.classList.add("card-selected-front");
-            //counter_move++
         }else{
-            setTimeout(turn_up, 500);
-            //counter_move++
+            setTimeout(turn_up, 1000);
         }
 
-        setTimeout(reset_counter, 500);
+        setTimeout(reset_counter, 1000);
     }
 
-    //document.querySelector(".card-selected")
+    setTimeout(end_game, 1000);
 }
 
 function turn_up() {
@@ -97,3 +104,24 @@ function reset_counter() {
     attempt1f = 0;
     attempt2f = 0;
 }
+
+function end_game() {
+    let cards_down = document.querySelectorAll(".card-selected-back");
+    //console.log(cards_down);
+
+    if(cards_down.length === number_of_cards){
+        alert(`Você ganhou em ${counter_move} jogadas!`);
+        let question = prompt("Parabéns você concluiu o jogo! Deseja jogar novamente? (Sim ou Não)");
+
+        if(question === "Sim"){
+           location.reload(true);
+        }
+    }
+}
+
+function game_time_increment() {
+    let initial_time = document.querySelector(".timer .timer-number");
+    initial_time.innerHTML = counter_game_time++;
+}
+
+setInterval(game_time_increment, 1000);
