@@ -1,21 +1,19 @@
-//Global
+//Global Variables
 let counter = 1;
-
 let attempt1 = 0;
 let attempt2 = 0;
 let attempt1f = 0;
 let attempt2f = 0;
-
 let counter_move = 0;
-
-let counter_game_time = 0; 
-
+let counter_game_time = 0;
+let fliped_cards = false;
 
 //Game Requests
 let number_of_cards = parseInt(prompt("Com quantas cartas você deseja começar? (Escolher números entre 4 e 14, que sejam pares)"));
 let even_number = number_of_cards % 2;
 let row_cards = document.querySelector(".row-cards");
 
+//Defeaut Array
 let array_gifs = [
     'gif1.gif',
     'gif2.gif',
@@ -32,10 +30,12 @@ while(even_number !== 0 || number_of_cards === null || number_of_cards < 4 || nu
     even_number = number_of_cards % 2;
 }
 
+//Array Even Creation
 let array_gifs_even = array_gifs.slice(0, number_of_cards/2);
     array_gifs_even = array_gifs_even.concat(array_gifs_even);
 
-array_gifs_even.sort(comparator); //Após esta linha, a minhaArray estará embaralhada
+//Shuffle Game Cards
+array_gifs_even.sort(comparator);
 
 //Input of Game Cards
 for(let i = 0; i < number_of_cards; i++){
@@ -51,11 +51,17 @@ for(let i = 0; i < number_of_cards; i++){
     `;
 }
 
+//Randomize Array
 function comparator() { 
 	return Math.random() - 0.5; 
 }
 
+//Card Game Select
 function game_card_select(card_game) {
+    if(fliped_cards === true){
+        return;
+    }
+
     const turn_down = card_game.querySelector(".back-face");
     const turn_down2 = card_game.querySelector(".front-face");
 
@@ -67,19 +73,23 @@ function game_card_select(card_game) {
     if(counter === 1){
         attempt1 = card_game.querySelector(".back-face");
         attempt1f = card_game.querySelector(".front-face");
+        card_game.classList.add("card-not-selected");
 
         counter++;
     }else if(counter === 2){
+        attempt1.parentNode.classList.remove("card-not-selected");
+
         attempt2 = card_game.querySelector(".back-face");
         attempt2f = card_game.querySelector(".front-face");
-
+        
         if(attempt1.innerHTML === attempt2.innerHTML){
             attempt1.classList.add("card-selected-back");
             attempt1f.classList.add("card-selected-front");
-
+            
             attempt2.classList.add("card-selected-back");
             attempt2f.classList.add("card-selected-front");
         }else{
+            fliped_cards = true;
             setTimeout(turn_up, 1000);
         }
 
@@ -89,39 +99,50 @@ function game_card_select(card_game) {
     setTimeout(end_game, 1000);
 }
 
+//Turn Up Card Game
 function turn_up() {
     attempt1.classList.remove("card-selected-back");
     attempt1f.classList.remove("card-selected-front");
 
     attempt2.classList.remove("card-selected-back");
     attempt2f.classList.remove("card-selected-front");
+
+    fliped_cards = false;
 }
 
+//Reset Counter Game
 function reset_counter() {
     counter = 1;
+
     attempt1 = 0;
     attempt2 = 0;
     attempt1f = 0;
     attempt2f = 0;
 }
 
+//End Game
 function end_game() {
     let cards_down = document.querySelectorAll(".card-selected-back");
-    //console.log(cards_down);
 
     if(cards_down.length === number_of_cards){
-        alert(`Você ganhou em ${counter_move} jogadas!`);
+        alert(`Você ganhou em ${counter_move} jogadas e em ${counter_game_time} segundos!`);
         let question = prompt("Parabéns você concluiu o jogo! Deseja jogar novamente? (Sim ou Não)");
 
         if(question === "Sim"){
-           location.reload(true);
+            number_of_cards = 0;
+            location.reload(true);
+        }else{
+            number_of_cards = 0;
+            clearInterval(break_increment);
         }
     }
 }
 
+//Game Time Increment
 function game_time_increment() {
     let initial_time = document.querySelector(".timer .timer-number");
     initial_time.innerHTML = counter_game_time++;
 }
 
-setInterval(game_time_increment, 1000);
+//Break Point Counter
+let break_increment = setInterval(game_time_increment, 1000);

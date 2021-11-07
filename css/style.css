@@ -70,7 +70,7 @@ body{
 
 .timer{
     background-color: #A7E9AF;
-    color: white;
+    color: #75B79E;
     
     font-size: 15px;
     font-weight: bold;
@@ -79,6 +79,8 @@ body{
     margin: 5px;
     
     border-radius: 3px;
+
+    box-shadow: 1px 1px 1px rgba(0,0,0,.3);
 
     position: absolute;
     right: 0;
@@ -113,20 +115,16 @@ body{
     transform: rotateY(180deg);
 }
 
-/* .card-selected:hover .back-face {
-    transform: rotateY(0deg);
-}
-
-.card-selected:hover .front-face {
-    transform: rotateY(-180deg);
-} */
-
 .card-selected-back{
     transform: rotateY(0deg);
 }
 
 .card-selected-front{
     transform: rotateY(-180deg);
+}
+
+.card-not-selected{
+    pointer-events: none;
 }
 
 @media (max-width: 1150px){
