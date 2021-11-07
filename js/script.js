@@ -125,7 +125,7 @@ function end_game() {
     let cards_down = document.querySelectorAll(".card-selected-back");
 
     if(cards_down.length === number_of_cards){
-        alert(`Você ganhou em ${counter_move} jogadas e em ${counter_game_time} segundos!`);
+        alert(`Você ganhou em ${counter_move} jogadas e em ${counter_game_time - 1} segundos!`);
         let question = prompt("Parabéns você concluiu o jogo! Deseja jogar novamente? (Sim ou Não)");
 
         if(question === "Sim"){
