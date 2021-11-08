@@ -26,7 +26,7 @@ let array_gifs = [
 
 //Looping Request
 while(even_number !== 0 || number_of_cards === null || number_of_cards < 4 || number_of_cards > 14){
-    number_of_cards = parseInt(prompt("Com quantas cartas você deseja começar?"));
+    number_of_cards = parseInt(prompt("Com quantas cartas você deseja começar? (Escolher números entre 4 e 14, que sejam pares)"));
     even_number = number_of_cards % 2;
 }
 
@@ -38,7 +38,7 @@ let array_gifs_even = array_gifs.slice(0, number_of_cards/2);
 array_gifs_even.sort(comparator);
 
 //Input of Game Cards
-for(let i = 0; i < number_of_cards; i++){
+for(let i = 0; i < number_of_cards; i++) {
     row_cards.innerHTML = row_cards.innerHTML + `
         <div class="card" data-identifier="card" onclick="game_card_select(this)">
             <div class="game-card front-face face" data-identifier="front-face">
@@ -73,6 +73,7 @@ function game_card_select(card_game) {
     if(counter === 1){
         attempt1 = card_game.querySelector(".back-face");
         attempt1f = card_game.querySelector(".front-face");
+
         card_game.classList.add("card-not-selected");
 
         counter++;
@@ -83,13 +84,18 @@ function game_card_select(card_game) {
         attempt2f = card_game.querySelector(".front-face");
         
         if(attempt1.innerHTML === attempt2.innerHTML){
+            fliped_cards = true;
+
             attempt1.classList.add("card-selected-back");
             attempt1f.classList.add("card-selected-front");
+            attempt1.parentNode.classList.add("card-not-selected");
             
             attempt2.classList.add("card-selected-back");
             attempt2f.classList.add("card-selected-front");
+            attempt2.parentNode.classList.add("card-not-selected");
         }else{
             fliped_cards = true;
+
             setTimeout(turn_up, 1000);
         }
 
@@ -118,6 +124,8 @@ function reset_counter() {
     attempt2 = 0;
     attempt1f = 0;
     attempt2f = 0;
+
+    fliped_cards = false;
 }
 
 //End Game
