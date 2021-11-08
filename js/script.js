@@ -1,9 +1,9 @@
 //Global Variables
 let counter = 1;
-let attempt1 = 0;
-let attempt2 = 0;
-let attempt1f = 0;
-let attempt2f = 0;
+let attempt1;
+let attempt2;
+let attempt1f;
+let attempt2f;
 let counter_move = 0;
 let counter_game_time = 0;
 let fliped_cards = false;
