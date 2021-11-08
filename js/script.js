@@ -7,6 +7,7 @@ let attempt2f = 0;
 let counter_move = 0;
 let counter_game_time = 0;
 let fliped_cards = false;
+let break_increment;
 
 //Game Requests
 let number_of_cards = parseInt(prompt("Com quantas cartas você deseja começar? (Escolher números entre 4 e 14, que sejam pares)"));
@@ -30,11 +31,14 @@ while(even_number !== 0 || number_of_cards === null || number_of_cards < 4 || nu
     even_number = number_of_cards % 2;
 }
 
+//Shuffle Game Cards Array Gif
+array_gifs.sort(comparator);
+
 //Array Even Creation
 let array_gifs_even = array_gifs.slice(0, number_of_cards/2);
     array_gifs_even = array_gifs_even.concat(array_gifs_even);
 
-//Shuffle Game Cards
+//Shuffle Game Cards Array Gif Even
 array_gifs_even.sort(comparator);
 
 //Input of Game Cards
@@ -68,6 +72,11 @@ function game_card_select(card_game) {
     turn_down.classList.add("card-selected-back");
     turn_down2.classList.add("card-selected-front");
 
+    //Break Point Counter
+    if(counter_move === 0){
+        break_increment = setInterval(game_time_increment, 1000);
+    }
+    
     counter_move++;
 
     if(counter === 1){
@@ -82,7 +91,7 @@ function game_card_select(card_game) {
 
         attempt2 = card_game.querySelector(".back-face");
         attempt2f = card_game.querySelector(".front-face");
-        
+
         if(attempt1.innerHTML === attempt2.innerHTML){
             fliped_cards = true;
 
@@ -134,16 +143,34 @@ function end_game() {
 
     if(cards_down.length === number_of_cards){
         alert(`Você ganhou em ${counter_move} jogadas e em ${counter_game_time - 1} segundos!`);
-        let question = prompt("Parabéns você concluiu o jogo! Deseja jogar novamente? (Sim ou Não)");
+        
+        let question_counter = 0;
+        while(question_counter === 0){
+            let question = prompt("Parabéns você concluiu o jogo! Deseja jogar novamente? (Sim ou Não)");
 
-        if(question === "Sim"){
-            number_of_cards = 0;
-            location.reload(true);
-        }else{
-            number_of_cards = 0;
-            clearInterval(break_increment);
+            if(question === "Sim"){
+                number_of_cards = 0;
+                location.reload(true);
+
+                question_counter++;
+            }else if(question === "Não"){
+                number_of_cards = 0;
+                clearInterval(break_increment);
+    
+                let restart_game_button = document.querySelector(".restart-game");
+                restart_game_button.classList.add("restart-game-visible");
+                
+                question_counter++;
+            }else{
+                alert("Por favor, responda somente Sim ou Não!");
+            }
         }
     }
+}
+
+//Restart Game
+function restart_game() {
+    location.reload(true);
 }
 
 //Game Time Increment
@@ -151,6 +178,3 @@ function game_time_increment() {
     let initial_time = document.querySelector(".timer .timer-number");
     initial_time.innerHTML = counter_game_time++;
 }
-
-//Break Point Counter
-let break_increment = setInterval(game_time_increment, 1000);

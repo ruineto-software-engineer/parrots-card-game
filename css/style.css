@@ -68,6 +68,45 @@ body{
     height: 100px;
 }
 
+.restart-game{
+    background-color: #A7E9AF;
+    color: #75B79E;
+    
+    font-size: 15px;
+    font-weight: bold;
+
+    padding: 5px;
+    margin: 5px;
+    
+    border: none;
+    border-radius: 3px;
+
+    box-shadow: 1px 1px 1px rgba(0,0,0,.3);
+
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    visibility: hidden;
+}
+
+.reload-outline{
+    font-size: 15px;
+    margin-right: 5px;
+}
+
+.restart-game-visible{
+    visibility: visible;
+}
+
+.restart-game:active{
+    background-color: #acddb2;
+}
+
 .timer{
     background-color: #A7E9AF;
     color: #75B79E;
