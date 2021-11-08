@@ -31,10 +31,17 @@
             </div><!--row-cards-->
         </div><!--content-game-cards-->
 
-        <button class="restart-game" onclick="restart_game()">
-            <!--reload-circle-->
-            <ion-icon class="reload-outline" name="reload-outline"></ion-icon> Reiniciar jogo
-        </button><!--restart-game-->
+        <div class="game-buttons">
+            <button class="play-pause" onclick="play_pause()">
+                <!--pause-->
+                <ion-icon class="pause" name="pause"></ion-icon> Pause
+            </button><!--play-pause-->
+
+            <button class="restart-game" onclick="restart_game()">
+                <!--reload-circle-->
+                <ion-icon class="reload-outline" name="reload-outline"></ion-icon> Reiniciar jogo
+            </button><!--restart-game-->
+        </div><!--game-buttons-->
 
         <div class="timer">
             Tempo de jogo: <span class="timer-number">0</span>s <!--timer-number-->

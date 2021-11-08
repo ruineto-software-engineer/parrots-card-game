@@ -68,6 +68,14 @@ body{
     height: 100px;
 }
 
+.game-buttons{
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    display: flex;
+}
+
 .restart-game{
     background-color: #A7E9AF;
     color: #75B79E;
@@ -83,15 +91,13 @@ body{
 
     box-shadow: 1px 1px 1px rgba(0,0,0,.3);
 
-    position: absolute;
-    left: 0;
-    top: 0;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
 
     visibility: hidden;
+
+    cursor: pointer;
 }
 
 .reload-outline{
@@ -107,7 +113,7 @@ body{
     background-color: #acddb2;
 }
 
-.timer{
+.play-pause{
     background-color: #A7E9AF;
     color: #75B79E;
     
@@ -115,6 +121,48 @@ body{
     font-weight: bold;
 
     padding: 5px;
+    margin: 5px;
+    
+    border: none;
+    border-radius: 3px;
+
+    box-shadow: 1px 1px 1px rgba(0,0,0,.3);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    visibility: hidden;
+
+    cursor: pointer;
+}
+
+.play-pause:active{
+    background-color: #acddb2;
+}
+
+.pause{
+    font-size: 15px;
+    margin-right: 5px;   
+}
+
+.play{
+    font-size: 15px;
+    margin-right: 5px; 
+}
+
+.play-pause-visibility{
+    visibility: visible;
+}
+
+.timer{
+    background-color: #A7E9AF;
+    color: #75B79E;
+    
+    font-size: 15px;
+    font-weight: bold;
+
+    padding: 6px;
     margin: 5px;
     
     border-radius: 3px;

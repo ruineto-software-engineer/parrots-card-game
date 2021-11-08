@@ -75,6 +75,8 @@ function game_card_select(card_game) {
     //Break Point Counter
     if(counter_move === 0){
         break_increment = setInterval(game_time_increment, 1000);
+        let play_pause_button_visibility = document.querySelector(".play-pause");
+        play_pause_button_visibility.classList.add("play-pause-visibility");
     }
     
     counter_move++;
@@ -165,6 +167,33 @@ function end_game() {
                 alert("Por favor, responda somente Sim ou Não!");
             }
         }
+    }
+}
+
+//Play or Pause Game
+function play_pause() {
+    let play_pause_button = document.querySelector(".play-pause");
+
+    console.log(play_pause_button.innerText);
+
+    if(play_pause_button.innerText === "Pause"){
+        play_pause_button.innerHTML = "";
+        play_pause_button.innerHTML = `
+            <!--pause-->
+            <ion-icon name="play"></ion-icon> Continuar
+        `;
+
+        clearInterval(break_increment);
+        fliped_cards = true;
+    }else{
+        play_pause_button.innerHTML = "";
+        play_pause_button.innerHTML = `
+            <!--pause-->
+            <ion-icon class="pause" name="pause"></ion-icon> Pause
+        `;
+
+        break_increment = setInterval(game_time_increment, 1000);
+        fliped_cards = false;
     }
 }
 
