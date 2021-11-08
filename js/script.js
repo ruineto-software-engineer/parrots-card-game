@@ -161,6 +161,10 @@ function end_game() {
     
                 let restart_game_button = document.querySelector(".restart-game");
                 restart_game_button.classList.add("restart-game-visible");
+
+                let play_pause_button = document.querySelector(".game-buttons .play-pause");
+                play_pause_button.classList.remove("play-pause");
+                play_pause_button.innerHTML = "";
                 
                 question_counter++;
             }else{
@@ -173,8 +177,6 @@ function end_game() {
 //Play or Pause Game
 function play_pause() {
     let play_pause_button = document.querySelector(".play-pause");
-
-    console.log(play_pause_button.innerText);
 
     if(play_pause_button.innerText === "Pause"){
         play_pause_button.innerHTML = "";
